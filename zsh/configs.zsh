@@ -19,21 +19,34 @@ alias gc="git branch --no-merged | grep -v 'remotes/' | xargs git branch -D"
 gcp() {
     git clone git@github.com:juan-gomez-neostella/$1.git
 }
-##Brew
-# brewc() {
-#     brew outdated -g
-#     echo -n "Do you want to update? (Y/n) "
-#     read -r response
-#     if [[ "$response" =~ ^[Yy]$ ]]; then
-#         echo "Updating..."
-#         brew update && brew upgrade --greedy
-#     else
-#         echo "Skipping update."
-#     fi
-#     brew cleanup && brew doctor
-# }
 ##APT
 aptc() {
     echo "Updating..."
     sudo apt update && sudo apt upgrade
 }
+
+#Fastfetch
+# fastfetch
+
+# Python
+# List pip packages size
+pipsize() {
+    LANG=C pip list |
+        tail -n +3 |
+        awk '{print $1}' |
+        xargs pip show |
+        grep -E 'Location:|Name:' |
+        cut -d ' ' -f 2 |
+        paste -d ' ' - - |
+        awk '{print $2 "/" tolower($1)}' |
+        xargs du -sh 2>/dev/null |
+        sort -hr
+}
+
+#Neostella
+alias vscode="code --remote wsl+ubuntu \"\$(pwd)\""
+
+alias vinebotsdev="export AWS_PROFILE=vinebotsdev"
+alias vinebotsqa="export AWS_PROFILE=vinebotsqa"
+alias vineportaldev="export AWS_PROFILE=vineportaldev"
+alias vineportalqa="export AWS_PROFILE=vineportalqa"

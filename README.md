@@ -7,7 +7,7 @@ eval "$(ssh-agent -s)" && ssh-add ~/.ssh/work_key
 ```
 Copy the ssh key and add it to [Github](https://github.com/settings/keys):
 ```sh
-tr -d '\n' < ~/.ssh/personal_key.pub | pbcopy
+tr -d '\n' < ~/.ssh/work_key.pub | pbcopy
 ```
 
 # Run Installation script
