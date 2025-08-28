@@ -24,6 +24,12 @@ Run installation script:
 zsh setup.sh
 ```
 
+# Set Up Logi Option+ Backup
+This is the path in Windows where the settings are located:
+```sh
+C:\Users\juan.gomez\AppData\Local\LogiOptionsPlus
+```
+
 # Resources
 * [Configure Multiple Git Accounts](https://dev.to/gitguardian/8-easy-steps-to-set-up-multiple-git-accounts-cheat-sheet-included-4i8j)
 * [Example Dotfiles repo](https://github.com/CoreyMSchafer/dotfiles)
