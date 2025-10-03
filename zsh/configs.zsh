@@ -1,35 +1,64 @@
 # Custom ZSH configurations, aliases, etc.
 
-#Oh My Zsh Plugins
+# Oh My Zsh Plugins
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
-#asdf
-export PATH="$HOME/.asdf/bin:$PATH"
+# brew
+eval $(/opt/homebrew/bin/brew shellenv)
+
+# asdf
 export ASDF_DATA_DIR=$HOME/.asdf
 export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
-#aliases
-##colorls (ls with icons)
+# aliases
+## colorls (ls with icons)
 alias lc="colorls"
-##Git
+## Git
 alias gc="git branch --no-merged | grep -v 'remotes/' | xargs git branch -D"
 
-#Commands
-##Git
+# Commands
+## Git
 gcp() {
     git clone git@github.com:juan-gomez-neostella/$1.git
 }
-##APT
-aptc() {
-    echo "Updating..."
-    sudo apt update && sudo apt upgrade
+## Brew
+brewc() {
+    # list of casks you want to skip
+    SKIP=("rectangle")
+
+    brew outdated -g
+    echo -n "Do you want to update? (Y/n) "
+    read -r response
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+        echo "Updating..."
+        brew update
+
+        # get all outdated greedy casks
+        casks=$(brew outdated --greedy --cask | awk '{print $1}')
+
+        # filter out skipped ones
+        for skip in "${SKIP[@]}"; do
+            casks=$(echo "$casks" | grep -v "^$skip$")
+        done
+
+        # upgrade formulae
+        brew upgrade
+
+        # upgrade filtered casks
+        if [[ -n "$casks" ]]; then
+            brew upgrade --cask $casks
+        fi
+    else
+        echo "Skipping update."
+    fi
+    brew cleanup && brew doctor
 }
 
-#Fastfetch
+# Fastfetch
 # fastfetch
 
 # Python
-# List pip packages size
+## List pip packages size
 pipsize() {
     LANG=C pip list |
         tail -n +3 |
@@ -44,10 +73,9 @@ pipsize() {
 }
 
 #Neostella
-alias vscode="code --remote wsl+ubuntu \"\$(pwd)\""
-
 alias vinebotsdev="export AWS_PROFILE=vinebotsdev"
-alias vinebotsqa="export AWS_PROFILE=vinebotsqa"
+alias tejodev="export AWS_PROFILE=tejodev"
 alias vineportaldev="export AWS_PROFILE=vineportaldev"
-alias vineportalqa="export AWS_PROFILE=vineportalqa"
 alias devVinePortal="export AWS_PROFILE=devVinePortal"
+alias vinebotsqa="export AWS_PROFILE=vinebotsqa"
+alias vineportalqa="export AWS_PROFILE=vineportalqa"

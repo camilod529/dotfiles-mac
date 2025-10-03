@@ -25,15 +25,16 @@ zsh setup.sh
 ```
 
 # Set Up Logi Option+ Backup
-This is the path in Windows where the settings are located:
+Sometimes, the symlink process can cause problems. If that is the case, after running the instalation script, use the `Activity Monitor` app to `Quit` all ongoing `Logi Options` processes (might need to restart computer).
+This is the path in MacOS where the settings are located:
 ```sh
-C:\Users\juan.gomez\AppData\Local\LogiOptionsPlus
+~/Library/Application\ Support/LogiOptionsPlus
 ```
 
 # Resources
+* [asdf](https://asdf-vm.com)
 * [Configure Multiple Git Accounts](https://dev.to/gitguardian/8-easy-steps-to-set-up-multiple-git-accounts-cheat-sheet-included-4i8j)
 * [Example Dotfiles repo](https://github.com/CoreyMSchafer/dotfiles)
-* [asdf](https://asdf-vm.com)
-* [Homebrew](https://brew.sh)
 * [GitHub's SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
+* [Homebrew](https://brew.sh)
 * [Multiple Github Accounts](https://gist.github.com/Jonalogy/54091c98946cfe4f8cdab2bea79430f9)

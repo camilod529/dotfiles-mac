@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-# TODO: Rework script for WSL
-
 # Install Xcode Command Line Tools
 xcode-select --install
 
@@ -20,17 +18,12 @@ source zsh.sh
 # Set up hostname
 sudo scutil --set HostName pampa
 
-# Set up Warp
-mkdir -p ~/.warp/themes/
-ln -s ~/projects/dotfiles/themes/One_Dark_Darker.yaml  ~/.warp/themes/One_Dark_Darker.yaml
-ln -s ~/projects/dotfiles/configs/warp/keybindings.yaml ~/.warp/keybindings.yaml
-
 # Set up fastfetch
 mkdir -p ~/.config/fastfetch
 ln -s ~/projects/dotfiles/configs/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
 
 # Set up Colorls (lc)
-if which gem > /dev/null 2>&1; then
+if which gem >/dev/null 2>&1; then
     gem install colorls
 else
     echo "Gem doesn't seem to be configure in your PATH. Check your asdf configs."
