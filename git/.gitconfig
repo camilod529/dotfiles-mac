@@ -13,10 +13,10 @@
 [fetch]
     prune = true
 [user]
-    name = Juan Gomez
-    email = juan.gomez@neostella.com
-    username = juan-gomez-neostella
+    name = Camilo Duran
+    email = camilod529@gmail.com
+    username = camilod529
 [github]
-    user = juan-gomez-neostella
+    user = camilod529
 [core]
-    sshCommand="ssh -i ~/.ssh/work_key"
+    sshCommand="ssh -i ~/.ssh/personal_key"

@@ -72,10 +72,3 @@ pipsize() {
         sort -hr
 }
 
-#Neostella
-alias vinebotsdev="export AWS_PROFILE=vinebotsdev"
-alias tejodev="export AWS_PROFILE=tejodev"
-alias vineportaldev="export AWS_PROFILE=vineportaldev"
-alias devVinePortal="export AWS_PROFILE=devVinePortal"
-alias vinebotsqa="export AWS_PROFILE=vinebotsqa"
-alias vineportalqa="export AWS_PROFILE=vineportalqa"

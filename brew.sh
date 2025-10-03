@@ -28,9 +28,15 @@ brew cleanup
 # Define an array of packages to install using Homebrew.
 packages=(
     "asdf"
-    "awscli"
     "fastfetch"
     "shfmt"
+    "wget"
+    "curl"
+    "htop"
+    "tree"
+    "neofetch"
+    "bat"
+    "gh"
 )
 
 # Loop over the array to install each application.
@@ -45,13 +51,22 @@ done
 
 # Define an array of applications to install using Homebrew Cask.
 apps=(
-    "aws-vpn-client"
     "bruno"
     "dbeaver-community"
-    "rancher"
+    "docker"
     "rectangle"
     "the-unarchiver"
     "visual-studio-code"
+    "ghostty"
+    "alt-tab"
+    "raycast"
+    "obsidian"
+    "discord"
+    "spotify"
+    "vlc"
+    "whatsapp"
+    "google-chrome"
+    "firefox"
 )
 
 # Loop over the array to install each application.
@@ -72,6 +87,8 @@ brew install speedtest --force
 fonts=(
     "font-caskaydia-mono-nerd-font"
     "font-monaspace-nerd-font"
+    "font-fira-code-nerd-font"
+    "font-mononoki-nerd-font"
 )
 
 for font in "${fonts[@]}"; do

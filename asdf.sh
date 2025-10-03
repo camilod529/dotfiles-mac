@@ -33,10 +33,4 @@ if ! asdf plugin list | grep -q "python"; then
     asdf plugin add python
 fi
 
-if ! asdf plugin list | grep -q "ruby"; then
-    echo "Installing asdf ruby plugin..."
-    brew install libyaml gmp autoconf
-    asdf plugin add ruby
-fi
-
 asdf install
