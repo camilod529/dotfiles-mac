@@ -20,3 +20,42 @@
     user = camilod529
 [core]
     sshCommand="ssh -i ~/.ssh/personal_key"
+[alias]
+    undo = reset --soft HEAD^
+    rebranch = "!f() { git branch -D \"$1\" && git checkout -b \"$1\"; }; f"
+    fpush = "!f() { git push --set-upstream origin \"$1\" --force; }; f"
+    fpushme = "!git push --force --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
+    pushme = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+    coqa = "!b=$(git rev-parse --abbrev-ref HEAD)-qa && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
+    coprod = "!b=$(git rev-parse --abbrev-ref HEAD)-prod && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
+    gobase = "!f() { \
+        b=$(git rev-parse --abbrev-ref HEAD); \
+        base=$(echo \"$b\" | sed -E 's/(-qa|-dev|-prod|-staging)$//'); \
+        echo Switching to $base && git checkout \"$base\"; \
+    }; f"
+    codev = "!b=$(git rev-parse --abbrev-ref HEAD)-dev && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
+    costg = "!b=$(git rev-parse --abbrev-ref HEAD)-staging && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
+    stg = checkout staging
+    qa = checkout qa
+    dev = checkout dev
+    prod = checkout prod
+    lg = log --oneline --graph --decorate --all
+    last = log -1 HEAD
+    reqa = "!f() { \
+        current=$(git rev-parse --abbrev-ref HEAD); \
+        new_branch=\"${current}-qa\"; \
+        git branch -D \"$new_branch\" 2>/dev/null || true; \
+        git checkout -b \"$new_branch\"; \
+    }; f"
+    reprod = "!f() { \
+        current=$(git rev-parse --abbrev-ref HEAD); \
+        new_branch=\"${current}-prod\"; \
+        git branch -D \"$new_branch\" 2>/dev/null || true; \
+        git checkout -b \"$new_branch\"; \
+    }; f"
+    redev = "!f() { \
+        current=$(git rev-parse --abbrev-ref HEAD); \
+        new_branch=\"${current}-dev\"; \
+        git branch -D \"$new_branch\" 2>/dev/null || true; \
+        git checkout -b \"$new_branch\"; \
+    }; f"
