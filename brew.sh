@@ -37,6 +37,7 @@ packages=(
     "neofetch"
     "bat"
     "gh"
+    "lsd"
 )
 
 # Loop over the array to install each application.
