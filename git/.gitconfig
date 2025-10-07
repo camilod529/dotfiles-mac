@@ -35,10 +35,10 @@
     }; f"
     codev = "!b=$(git rev-parse --abbrev-ref HEAD)-dev && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
     costg = "!b=$(git rev-parse --abbrev-ref HEAD)-staging && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
-    stg = checkout staging
-    qa = checkout qa
-    dev = checkout dev
-    prod = checkout prod
+    stg = "!git checkout staging && git pull origin staging"
+    qa = "!git checkout qa && git pull origin qa"
+    dev = "!git checkout dev && git pull origin dev"
+    prod = "!git checkout prod && git pull origin prod"
     lg = log --oneline --graph --decorate --all
     last = log -1 HEAD
     reqa = "!f() { \
