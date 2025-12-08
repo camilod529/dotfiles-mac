@@ -18,13 +18,13 @@ alias gc="git branch --no-merged | grep -v 'remotes/' | xargs git branch -D"
 
 # Commands
 ## Git
-gcp() {
-    git clone git@github.com:juan-gomez-neostella/$1.git
-}
+# gcp() {
+#     git clone git@github.com:juan-gomez-neostella/$1.git
+# }
 ## Brew
 brewc() {
     # list of casks you want to skip
-    SKIP=("rectangle")
+    # SKIP=("rectangle")
 
     brew outdated -g
     echo -n "Do you want to update? (Y/n) "
@@ -33,27 +33,38 @@ brewc() {
         echo "Updating..."
         brew update
 
-        # get all outdated greedy casks
-        casks=$(brew outdated --greedy --cask | awk '{print $1}')
-
-        # filter out skipped ones
-        for skip in "${SKIP[@]}"; do
-            casks=$(echo "$casks" | grep -v "^$skip$")
-        done
+        # get all outdated greedy casks into an array
+        casks=()
+        while IFS= read -r cask; do
+            # skip empty lines
+            [[ -z "$cask" ]] && continue
+            
+            # check if this cask should be skipped
+            skip_cask=0
+            for skip in "${SKIP[@]}"; do
+                if [[ "$cask" == "$skip" ]]; then
+                    skip_cask=1
+                    break
+                fi
+            done
+            
+            # add to array if not skipped
+            [[ $skip_cask -eq 0 ]] && casks+=("$cask")
+        done < <(brew outdated --greedy --cask | awk '{print $1}')
 
         # upgrade formulae
         brew upgrade
 
-        # upgrade filtered casks
-        if [[ -n "$casks" ]]; then
-            brew upgrade --cask $casks
+        # upgrade filtered casks if any
+        if [[ ${#casks[@]} -gt 0 ]]; then
+            echo "Upgrading casks: ${casks[*]}"
+            brew upgrade --cask "${casks[@]}"
         fi
     else
         echo "Skipping update."
     fi
     brew cleanup && brew doctor
 }
-
 # Fastfetch
 # fastfetch
 

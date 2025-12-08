@@ -6,7 +6,7 @@ SPACESHIP_PROMPT_ORDER=(
     git  # Git section (git_branch + git_status)
     # hg             # Mercurial section (hg_branch  + hg_status)
     # package        # Package version
-    # node           # Node.js section
+    node           # Node.js section
     # bun            # Bun section
     # deno           # Deno section
     # ruby           # Ruby section

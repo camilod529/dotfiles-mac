@@ -8,6 +8,9 @@
     cmd = code --wait --diff $LOCAL $REMOTE
 [core]
     editor = "code --wait"
+    sshCommand="ssh -i ~/.ssh/personal_key"
+[init]
+	defaultBranch = main
 [pull]
     rebase = false
 [fetch]
@@ -18,8 +21,6 @@
     username = camilod529
 [github]
     user = camilod529
-[core]
-    sshCommand="ssh -i ~/.ssh/personal_key"
 [alias]
     undo = reset --soft HEAD^
     rebranch = "!f() { git branch -D \"$1\" && git checkout -b \"$1\"; }; f"
@@ -35,10 +36,10 @@
     }; f"
     codev = "!b=$(git rev-parse --abbrev-ref HEAD)-dev && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
     costg = "!b=$(git rev-parse --abbrev-ref HEAD)-staging && (git rev-parse --verify $b >/dev/null 2>&1 && git checkout $b || git checkout -b $b)"
-    stg = "!git checkout staging && git pull origin staging"
-    qa = "!git checkout qa && git pull origin qa"
-    dev = "!git checkout dev && git pull origin dev"
-    prod = "!git checkout prod && git pull origin prod"
+    stg = "!git branch -D staging && git checkout staging && git pull origin staging"
+    qa = "!git branch -D qa && git checkout qa && git pull origin qa"
+    dev = "!git branch -D dev && git checkout dev && git pull origin dev"
+    prod = "!git branch -D prod && git checkout prod && git pull origin prod"
     lg = log --oneline --graph --decorate --all
     last = log -1 HEAD
     reqa = "!f() { \
@@ -59,3 +60,9 @@
         git branch -D \"$new_branch\" 2>/dev/null || true; \
         git checkout -b \"$new_branch\"; \
     }; f"
+    mergebase = "!f() { \
+        b=$(git rev-parse --abbrev-ref HEAD); \
+        base=$(echo \"$b\" | sed -E 's/(-qa|-dev|-prod|-staging)$//'); \
+        echo Merging from $base into $b && git merge \"$base\"; \
+    }; f"
+

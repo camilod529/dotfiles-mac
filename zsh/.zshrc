@@ -2,7 +2,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="spaceship"
 
-plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-completions macos)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-completions macos git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -39,7 +39,7 @@ alias gstg="git checkout staging"
 # ----------------------
 # Useful tools
 # ----------------------
-alias fetch="neofetch"
+alias fetch="fastfetch"
 alias top="htop"
 
 # ----------------------
