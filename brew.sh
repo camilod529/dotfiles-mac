@@ -34,7 +34,6 @@ packages=(
     "curl"
     "htop"
     "tree"
-    "fastfetch"
     "bat"
     "gh"
     "lsd"
@@ -67,6 +66,7 @@ apps=(
     "whatsapp"
     "google-chrome"
     "firefox"
+    "zen"
 )
 
 # Loop over the array to install each application.

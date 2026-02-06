@@ -47,3 +47,6 @@ alias top="htop"
 # ----------------------
 export EDITOR="code"
 export PAGER="bat"
+
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export PATH=$PATH:~/Library/Android/sdk/platform-tools/
