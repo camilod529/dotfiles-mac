@@ -58,8 +58,6 @@ apps=(
     "the-unarchiver"
     "visual-studio-code"
     "ghostty"
-    "alt-tab"
-    "raycast"
     "obsidian"
     "discord"
     "vlc"
@@ -71,11 +69,11 @@ apps=(
 
 # Loop over the array to install each application.
 for app in "${apps[@]}"; do
-    if brew list | grep -q "^$app\$"; then
+    if brew list --cask | grep -q "^$app\$"; then
         echo "$app is already installed. Skipping..."
     else
         echo "Installing $app..."
-        brew install "$app"
+        brew install --cask "$app"
     fi
 done
 
