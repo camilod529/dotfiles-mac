@@ -64,10 +64,19 @@ if [ -f ~/.tool-versions ]; then
 else
     echo "~/.tool-versions does not exist. Proceeding with symlink creation."
 fi
+
+if [ -f ~/.config/topgrade.toml ]; then
+    echo "~/.config/topgrade.toml exists. Deleting old ~/.config/topgrade.toml."
+    rm ~/.config/topgrade.toml
+else
+    echo "~/.config/topgrade.toml does not exist. Proceeding with symlink creation."
+fi
+
 ln -s ~/projects/dotfiles/zsh/.zshrc  ~/.zshrc
 ln -s ~/projects/dotfiles/zsh/.spaceshiprc.zsh  ~/.spaceshiprc.zsh
 ln -s ~/projects/dotfiles/git/.gitconfig  ~/.gitconfig
 ln -s ~/projects/dotfiles/.tool-versions ~/.tool-versions
+ln -s ~/projects/dotfiles/configs/topgrade.toml ~/.config/topgrade.toml
 
 if [ -f ~/.zshrc ]; then
     source ~/.zshrc
@@ -75,5 +84,3 @@ else
     echo "Symlink creation failed. ~/.zshrc does not exist."
     return 1
 fi
-
-

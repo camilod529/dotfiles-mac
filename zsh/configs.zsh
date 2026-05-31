@@ -83,3 +83,8 @@ pipsize() {
         sort -hr
 }
 
+# Go
+export PATH=$PATH:$(go env GOPATH)/bin
+
+# zsh custom scripts
+source ~/projects/dotfiles/zsh/commands/mkpr.zsh
