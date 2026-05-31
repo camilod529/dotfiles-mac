@@ -64,7 +64,7 @@ apps=(
     "whatsapp"
     "google-chrome"
     "firefox"
-    "zen"
+    "topgrade"
 )
 
 # Loop over the array to install each application.
