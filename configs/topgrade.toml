@@ -91,7 +91,7 @@ disable = [
 # tmux_session_mode = "attach_if_not_in_session"
 
 # Cleanup temporary or old files (default: false)
-# cleanup = true
+cleanup = true
 
 # Send a notification for every step (default: false)
 # notify_each_step = false
@@ -176,30 +176,7 @@ no_self_update = true
 # self_update = true
 
 [brew]
-# For the BrewCask step
-# If `Repo Cask Upgrade` exists, then use the `-a` option.
-# Otherwise, use the `--greedy` option.
-# greedy_cask = true
-
-# For the BrewCask step
-# If `Repo Cask Upgrade` does not exist, then use the `--greedy_latest` option.
-# NOTE: the above entry `greedy_cask` contains this entry, though you can enable
-# both of them, they won't clash with each other.
-# greedy_latest = true
-
-# For the BrewCask step
-# If `Repo Cask Upgrade` does not exist, then use the `--greedy_auto_updates` option.
-# NOTE: the above entry `greedy_cask` contains this entry, though you can enable
-# both of them, they won't clash with each other.
-# greedy_auto_updates = true
-
-# For the BrewFormula step
-# Execute `brew autoremove` after the step.
-# autoremove = true
-
-# For the BrewFormula step
-# Upgrade formulae built from the HEAD branch; `brew upgrade --fetch-HEAD`
-# fetch_head = true
+autoremove = true
 
 [linux]
 # Arch Package Manager to use.
