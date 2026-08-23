@@ -1,0 +1,13 @@
+{
+  "theme": "dark",
+  "permissions": {
+    "allow": [
+      "Bash(npm run typecheck *)",
+      "Bash(npm run lint *)",
+      "Bash(flutter analyze *)",
+      "Bash(flutter test *)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(adb devices -l *)"
+    ]
+  }
+}

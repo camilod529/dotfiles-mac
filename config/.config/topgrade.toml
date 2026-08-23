@@ -1,0 +1,44 @@
+# Full reference of every available key: `topgrade --config-reference`.
+# Only settings that differ from topgrade's defaults are kept here.
+
+[misc]
+# node/pip3/ruby_gems/gem/yarn are managed via asdf, not their native
+# updaters below — letting topgrade touch them too would fight asdf.
+# containers/helm: not used.
+disable = [
+  "containers",
+  "pip3",
+  "helm",
+  "node",
+  "ruby_gems",
+  "gem",
+  "yarn",
+]
+
+# Managed by the daemon's own auto-update; avoid updating from a second
+# tool while it's running.
+no_self_update = true
+
+# Remove temp/old files after a run.
+cleanup = true
+
+[post_commands]
+"Brew Cleanup" = "brew cleanup"
+"Brew Doctor" = "brew doctor"
+
+[brew]
+autoremove = true
+
+[git]
+max_concurrency = 5
+
+# oh-my-zsh plugin/theme dirs aren't part of topgrade's own built-in repo
+# list, so `pull_predefined = false` (which only skips *that* list) doesn't
+# affect these — they're always pulled.
+repos = [
+  "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions",
+  "~/.oh-my-zsh/custom/plugins/zsh-completions",
+  "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting",
+  "~/.oh-my-zsh/custom/themes/spaceship-prompt",
+]
+pull_predefined = false

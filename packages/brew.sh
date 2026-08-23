@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# macOS package list. Sourced by install.sh on Darwin only.
 
 # Install Homebrew if it isn't already installed
 if ! command -v brew &>/dev/null; then
