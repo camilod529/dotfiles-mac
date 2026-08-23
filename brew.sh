@@ -52,9 +52,11 @@ done
 # Define an array of applications to install using Homebrew Cask.
 apps=(
     "bruno"
+    "claude-code"
     "dbeaver-community"
     "docker"
     "rectangle"
+    "spotify"
     "the-unarchiver"
     "visual-studio-code"
     "ghostty"

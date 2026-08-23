@@ -11,8 +11,6 @@ export ASDF_DATA_DIR=$HOME/.asdf
 export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 # aliases
-## colorls (ls with icons)
-alias lc="colorls"
 ## Git
 alias gc="git branch --no-merged | grep -v 'remotes/' | xargs git branch -D"
 

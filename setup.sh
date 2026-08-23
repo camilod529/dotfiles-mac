@@ -16,19 +16,17 @@ source asdf.sh
 source zsh.sh
 
 # Set up hostname
-sudo scutil --set HostName pampa
+echo -n "Enter a hostname for this Mac (leave blank to skip): "
+read -r new_hostname
+if [ -n "$new_hostname" ]; then
+    sudo scutil --set HostName "$new_hostname"
+else
+    echo "Skipping hostname change."
+fi
 
 # Set up fastfetch
 mkdir -p ~/.config/fastfetch
 ln -s ~/projects/dotfiles/configs/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
-
-# Set up Colorls (lc)
-if which gem >/dev/null 2>&1; then
-    gem install colorls
-else
-    echo "Gem doesn't seem to be configure in your PATH. Check your asdf configs."
-    exit 1
-fi
 
 # Set up Logi Options+ settings file
 if [ -f ~/Library/Application\ Support/LogiOptionsPlus/settings.db ]; then

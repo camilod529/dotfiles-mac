@@ -34,6 +34,23 @@ Run installation script:
 zsh setup.sh
 ```
 
+# Set Up Work Git Identity (optional)
+
+Any repo cloned under `~/projects/work/` automatically uses a separate git identity via `includeIf` in `git/.gitconfig`. To enable it:
+
+```sh
+cp git/.gitconfig-work.example ~/.gitconfig-work
+```
+
+Edit `~/.gitconfig-work` with your real work email, and generate a separate SSH key for it:
+
+```sh
+ssh-keygen -t ed25519 -C "you@work.com" -f ~/.ssh/work_key
+eval "$(ssh-agent -s)" && ssh-add ~/.ssh/work_key
+```
+
+`~/.gitconfig-work` is machine-local and gitignored — it's never committed to this repo.
+
 # Set Up Logi Option+ Backup
 
 Sometimes, the symlink process can cause problems. If that is the case, after running the instalation script, use the `Activity Monitor` app to `Quit` all ongoing `Logi Options` processes (might need to restart computer).

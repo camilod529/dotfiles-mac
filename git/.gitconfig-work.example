@@ -1,0 +1,13 @@
+# Copy this file to ~/.gitconfig-work and fill in your real work values.
+# It is NOT tracked by git (see .gitignore) since it's machine-local and
+# may reference credentials/keys you don't want in the dotfiles repo.
+#
+# Any repo cloned under ~/projects/work/ will automatically use this
+# identity instead of the personal one in git/.gitconfig, via the
+# [includeIf "gitdir:~/projects/work/"] block.
+
+[user]
+    name = Camilo Duran
+    email = work-email@example.com
+[core]
+    sshCommand = "ssh -i ~/.ssh/work_key"
