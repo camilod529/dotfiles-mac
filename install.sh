@@ -111,4 +111,11 @@ if [ "$OS" = "macos" ]; then
     echo "— import it via Rectangle > Settings > Import."
 fi
 
+if [ ${#FAILED_INSTALLS[@]} -gt 0 ]; then
+    echo ""
+    echo "==> WARNING: ${#FAILED_INSTALLS[@]} package step(s) failed:"
+    printf '    - %s\n' "${FAILED_INSTALLS[@]}"
+    echo "    Scroll up for each one's error output."
+fi
+
 echo "==> Done. Restart your terminal (or 'exec zsh') to pick up shell changes."

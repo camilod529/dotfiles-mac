@@ -21,10 +21,16 @@ if ! command -v brew &>/dev/null; then
     exit 1
 fi
 
+# install.sh runs with `set -e`, so a single bad package used to abort the
+# whole install. Run brew steps through `try` instead: failures are recorded
+# in FAILED_INSTALLS and install.sh reports them at the end.
+FAILED_INSTALLS=()
+try() { "$@" || FAILED_INSTALLS+=("$*"); }
+
 # Update Homebrew and Upgrade any already-installed formulae
-brew update
-brew upgrade
-brew cleanup
+try brew update
+try brew upgrade
+try brew cleanup
 
 # Define an array of packages to install using Homebrew.
 packages=(
@@ -38,6 +44,7 @@ packages=(
     "bat"
     "gh"
     "lsd"
+    "topgrade"
 )
 
 # Loop over the array to install each application.
@@ -46,7 +53,7 @@ for package in "${packages[@]}"; do
         echo "$package is already installed. Skipping..."
     else
         echo "Installing $package..."
-        brew install "$package"
+        try brew install "$package"
     fi
 done
 
@@ -67,7 +74,6 @@ apps=(
     "whatsapp"
     "google-chrome"
     "firefox"
-    "topgrade"
 )
 
 # Loop over the array to install each application.
@@ -76,14 +82,14 @@ for app in "${apps[@]}"; do
         echo "$app is already installed. Skipping..."
     else
         echo "Installing $app..."
-        brew install --cask "$app"
+        try brew install --cask "$app"
     fi
 done
 
 # Install Speedtest by Okkla
-brew tap teamookla/speedtest
-brew update
-brew install speedtest --force
+try brew tap teamookla/speedtest
+try brew update
+try brew install speedtest --force
 
 fonts=(
     "font-caskaydia-mono-nerd-font"
@@ -97,11 +103,11 @@ for font in "${fonts[@]}"; do
         echo "$font is already installed. Skipping..."
     else
         echo "Installing $font..."
-        brew install "$font"
+        try brew install "$font"
     fi
 done
 
 # Update and clean up again for safe measure
-brew update
-brew upgrade
-brew cleanup
+try brew update
+try brew upgrade
+try brew cleanup

@@ -1,5 +1,4 @@
 {
-  "theme": "dark",
   "permissions": {
     "allow": [
       "Bash(npm run typecheck *)",
@@ -9,5 +8,6 @@
       "Bash(npx tsc --noEmit *)",
       "Bash(adb devices -l *)"
     ]
-  }
+  },
+  "theme": "dark"
 }
