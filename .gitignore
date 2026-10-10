@@ -28,3 +28,15 @@ Temporary Items
 
 # Custom Files
 .gitconfig-work
+
+# Claude Code runtime data (history, sessions, caches — not config)
+claude/.claude/.last-cleanup
+claude/.claude/backups/
+claude/.claude/cache/
+claude/.claude/file-history/
+claude/.claude/history.jsonl
+claude/.claude/plugins/
+claude/.claude/projects/
+claude/.claude/sessions/
+claude/.claude/shell-snapshots/
+claude/.claude/skills/
