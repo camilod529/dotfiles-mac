@@ -39,4 +39,5 @@ claude/.claude/plugins/
 claude/.claude/projects/
 claude/.claude/sessions/
 claude/.claude/shell-snapshots/
-claude/.claude/skills/
+# Skills synced from claude.ai land here at runtime; my own skills are tracked
+claude/.claude/skills/synced/

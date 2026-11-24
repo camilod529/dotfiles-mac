@@ -59,6 +59,22 @@ stow -d "$REPO_DIR" -t "$HOME" -R "${STOW_PACKAGES[@]}"
 # resolves it when running commands from inside the dotfiles repo itself.
 ln -sf "$REPO_DIR/.tool-versions" "$HOME/.tool-versions"
 
+# VS Code keeps its user settings outside a stow-friendly path on macOS, so
+# link them by hand. Skipped on servers and WSL (VS Code runs on Windows there).
+if [ "$DOTFILES_PROFILE" = "desktop" ] && [ "$IS_WSL" = false ]; then
+    if [ "$OS" = "macos" ]; then
+        VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+    else
+        VSCODE_USER_DIR="$HOME/.config/Code/User"
+    fi
+    mkdir -p "$VSCODE_USER_DIR"
+    if [ -e "$VSCODE_USER_DIR/settings.json" ] && [ ! -L "$VSCODE_USER_DIR/settings.json" ]; then
+        mv "$VSCODE_USER_DIR/settings.json" "$VSCODE_USER_DIR/settings.json.bak"
+        echo "Backed up existing VS Code settings to settings.json.bak"
+    fi
+    ln -sf "$REPO_DIR/vscode/settings.json" "$VSCODE_USER_DIR/settings.json"
+fi
+
 # ----------------------
 # 2. Shell (Oh My Zsh, plugins, theme)
 # ----------------------
@@ -79,6 +95,13 @@ if [ "$SKIP_PACKAGES" = false ]; then
 
     echo "==> Setting up asdf + language runtimes"
     source "$REPO_DIR/asdf.sh"
+
+    if [ "$DOTFILES_PROFILE" = "desktop" ] && command -v code &>/dev/null; then
+        echo "==> Installing VS Code extensions"
+        while IFS= read -r ext; do
+            [ -n "$ext" ] && { code --install-extension "$ext" >/dev/null || echo "Failed to install $ext"; }
+        done < "$REPO_DIR/vscode/extensions.txt"
+    fi
 fi
 
 # ----------------------

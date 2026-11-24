@@ -21,3 +21,26 @@ Camilo's dotfiles live at `~/projects/dotfiles`. `~/projects/dotfiles/git/.gitco
   - `git stg` / `git qa` / `git dev` / `git prod` — hard-reset local `staging`/`qa`/`dev`/`prod` to match `origin` (deletes and recreates the local branch, then pulls)
 
 Check `~/projects/dotfiles/git/.gitconfig` directly if an alias's exact behavior matters for a decision, rather than relying on this summary — it can drift.
+
+## Working preferences
+
+These apply in every project unless that project's own instructions say otherwise.
+
+### Git
+
+- Never run `git commit` or `git push` unless I've explicitly asked for that specific change — even when a default workflow (background jobs, PR automation) would do it on its own. Finish the work, run the checks, leave the changes in the working tree and tell me it's ready.
+- Never delete local branches (`git branch -d/-D`), not even fully merged ones or when removing their worktree — and don't offer to. Removing a worktree removes only the worktree.
+- Only use a worktree when the current branch is dirty. If `git status` is clean, work in place.
+
+### Checks
+
+- Run lint, format, test and type checks through the project's own scripts with its package manager (`yarn <script>`, `npm run <script>`, …), never `npx` or a tool's binary directly. Read the scripts from the `package.json` of the checkout being worked on first: branches and worktrees can differ.
+- TypeScript: when the root `tsconfig.json` is a solution file (`"files": []` + `references`), `tsc -p .` checks zero files and always passes. Use `tsc -b --noEmit` (or the project's build script). `tsc -b` is incremental: a second run in under a second is the cache, so add `--force` when the result has to be trusted.
+
+### Code
+
+- Keep comments lean: at most a one-line comment where the code isn't obvious; no multi-paragraph docblocks.
+
+### Multi-repo workspaces
+
+- When sibling repos are opened only so you can follow a contract across services, they are read-only: read them freely, but edit them (or run anything that writes there, including through scripts) only when I ask for that change.

@@ -61,6 +61,31 @@ generically stowed — `install.sh` handles them with a bit of extra logic on
 Darwin only. `packages/` holds the per-OS app-install scripts
 (`brew.sh`, `apt.sh`, `winget.ps1`).
 
+`claude/.claude/` holds the global Claude Code config: `CLAUDE.md` (working
+preferences), `settings.json`, the status line script and personal skills.
+Skills synced from claude.ai at runtime land in `skills/synced/`, which is
+gitignored.
+
+`vscode/` holds the VS Code user `settings.json` and `extensions.txt`. It isn't
+a stow package (on macOS the settings live under `~/Library/Application
+Support`), so the installers link the settings and install the extensions
+themselves. To refresh the extension list:
+
+```sh
+code --list-extensions > vscode/extensions.txt
+```
+
+# Machine-local config (never committed)
+
+Anything secret or tied to one machine/job stays out of this repo:
+
+- `~/.zshrc.local` — sourced at the end of `.zshrc` if it exists. Put tokens,
+  work-only aliases/functions and tool-managed PATH blocks (Rancher Desktop, …) here.
+- `~/.config/mkpr/reviewers` — reviewers `mkpr` requests per repo, one line
+  per repo: `<owner/repo glob> <reviewer1,reviewer2>` (e.g. `my-org/* alice,bob`).
+  Override the path with `MKPR_REVIEWERS_FILE`.
+- `~/.gitconfig-work` — see below.
+
 # Set Up Work Git Identity (optional)
 
 Any repo cloned under `~/projects/work/` automatically uses a separate git identity via `includeIf` in `git/.gitconfig`. To enable it:

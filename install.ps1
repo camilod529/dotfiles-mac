@@ -62,6 +62,13 @@ New-DotfileSymlink "config\.config\topgrade.toml" ".config\topgrade.toml"
 New-DotfileSymlink "config\.config\fastfetch\config.jsonc" ".config\fastfetch\config.jsonc"
 New-DotfileSymlink "claude\.claude\settings.json" ".claude\settings.json"
 New-DotfileSymlink "claude\.claude\CLAUDE.md" ".claude\CLAUDE.md"
+New-DotfileSymlink "claude\.claude\statusline.sh" ".claude\statusline.sh"  # needs bash + jq (e.g. Git Bash)
+Get-ChildItem (Join-Path $RepoDir "claude\.claude\skills") -Directory | ForEach-Object {
+    New-DotfileSymlink "claude\.claude\skills\$($_.Name)" ".claude\skills\$($_.Name)"
+}
+if ($env:DOTFILES_PROFILE -eq "desktop") {
+    New-DotfileSymlink "vscode\settings.json" "AppData\Roaming\Code\User\settings.json"
+}
 
 # ----------------------
 # 2. Cross-platform git config
@@ -74,6 +81,13 @@ git config --global core.autocrlf true
 if (-not $NoPackages) {
     Write-Host "==> Installing packages via winget"
     & (Join-Path $RepoDir "packages\winget.ps1")
+
+    if ($env:DOTFILES_PROFILE -eq "desktop" -and (Get-Command code -ErrorAction SilentlyContinue)) {
+        Write-Host "==> Installing VS Code extensions"
+        Get-Content (Join-Path $RepoDir "vscode\extensions.txt") | Where-Object { $_ } | ForEach-Object {
+            code --install-extension $_ | Out-Null
+        }
+    }
 } else {
     Write-Host "==> Skipping package installs (-NoPackages)"
 }

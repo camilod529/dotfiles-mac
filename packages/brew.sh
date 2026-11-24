@@ -43,6 +43,7 @@ packages=(
     "tree"
     "bat"
     "gh"
+    "jq"
     "lsd"
     "topgrade"
 )

@@ -1,0 +1,156 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": true
+  },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    },
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "editor.rulers": [
+      79,
+      100
+    ]
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.quickSuggestions": {
+      "strings": "on"
+    },
+    "editor.tabSize": 2
+  },
+  "black-formatter.args": [
+    "--line-length",
+    "100"
+  ],
+  "cSpell.language": "en,es-ES,fr",
+  "cSpell.userWords": [
+    "arango",
+    "automations",
+    "Automations",
+    "datagrid",
+    "Datagrid",
+    "datapoints",
+    "datastream",
+    "elkjs",
+    "fieldname",
+    "friday",
+    "groupable",
+    "hideable",
+    "krakend",
+    "Krakend",
+    "Layouted",
+    "monday",
+    "MUIX",
+    "notistack",
+    "oneline",
+    "outgoers",
+    "Outgoers",
+    "Quinceavo",
+    "reactflow",
+    "relayouted",
+    "saturday",
+    "setted",
+    "sunday",
+    "syncfusion",
+    "tabler",
+    "thursday",
+    "tuesday",
+    "wednesday",
+    "xyflow",
+    "ZIPCODE"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "editor.fontFamily": "'FiraCode Nerd Font', 'Mononoki Nerd Font', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": true,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "editor.suggest.showFolders": true,
+  "errorLens.enabledDiagnosticLevels": [
+    "warning",
+    "info",
+    "error"
+  ],
+  "explorer.compactFolders": false,
+  "extensions.autoCheckUpdates": false,
+  "flake8.args": [
+    "--max-line-length=100"
+  ],
+  "git.autofetch": true,
+  "git.autofetchPeriod": 180,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "gitlens.rebaseEditor.ordering": "asc",
+  "gitlens.views.commitDetails.files.layout": "list",
+  "isort.args": [
+    "--line-length",
+    "100",
+    "--profile",
+    "black"
+  ],
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.parameterNames.enabled": "literals",
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "javascript.inlayHints.variableTypes.enabled": true,
+  "jupyter.askForKernelRestart": false,
+  "python.testing.pytestArgs": [
+    "tests",
+    "-vv"
+  ],
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.fontFamily": "'Mononoki Nerd Font', 'FiraCode Nerd Font', Consolas",
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.suggest.enabled": true,
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "update.mode": "manual",
+  "workbench.activityBar.location": "top",
+  "workbench.iconTheme": "symbols",
+  "workbench.productIconTheme": "fluent-icons",
+  "workbench.sideBar.location": "right",
+  "terminal.integrated.stickyScroll.enabled": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.browser.openLocalhostLinks": false,
+  "workbench.colorTheme": "Halcyon",
+  "chat.viewSessions.orientation": "stacked",
+  "claudeCode.preferredLocation": "panel",
+  "workbench.experimental.modernUI": true
+}

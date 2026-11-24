@@ -5,9 +5,19 @@
       "Bash(npm run lint *)",
       "Bash(flutter analyze *)",
       "Bash(flutter test *)",
-      "Bash(npx tsc --noEmit *)",
       "Bash(adb devices -l *)"
     ]
   },
-  "theme": "dark"
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
+  },
+  "theme": "auto"
 }

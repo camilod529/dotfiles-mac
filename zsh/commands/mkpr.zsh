@@ -142,7 +142,7 @@ mkpr() {
   ticket="$(echo "$current_branch" | grep -oiE '[a-z]+-[0-9]+' | head -1 | tr '[:lower:]' '[:upper:]')"
 
   if [[ -z "$ticket" ]]; then
-    printf "🎫  Ticket number (e.g. TEJOR-892): "
+    printf "🎫  Ticket number (e.g. ABC-123): "
     read ticket
     ticket="$(echo "$ticket" | tr '[:lower:]' '[:upper:]')"
   else
@@ -201,11 +201,10 @@ mkpr() {
   done
 
   # ── Labels ──────────────────────────────────────────────────────────────────
-  # tejo-frontend: copy from source PR if available, otherwise prompt
-  # all other repos: always prompt
+  # Copy from the source PR if it had any, otherwise prompt
   local label=""
 
-  if [[ "$repo_slug" = "Neostella/tejo-frontend" && -n "$found_pr_labels" ]]; then
+  if [[ -n "$found_pr_labels" ]]; then
     echo "🏷️  Copying labels from source PR: $found_pr_labels"
     label="$found_pr_labels"
   else
@@ -249,24 +248,22 @@ mkpr() {
     fi
   fi
 
-  # ── Reviewers ────────────────────────────────────────────────────────────────
+  # ── Reviewers: read from a machine-local file, never hardcoded here ──────────
+  # One line per repo: "<owner/repo glob> <reviewer1,reviewer2>", e.g.
+  #   my-org/*   alice,bob
   local reviewers=""
-  case "$repo_slug" in
-    Neostella/tejo-backend|\
-    Neostella/tejo-automation-module|\
-    Neostella/tejo-automation-runner)
-      reviewers="juan-gomez-neostella,achavane-neostella,david-estrada-neostella"
-      ;;
-    Neostella/tejo-frontend)
-      reviewers="jperez-neostella,asarmiento-neostella,svelasquez-neostella"
-      ;;
-    *)
-      echo "⚠️  No reviewer mapping found for $repo_slug (creating PR without reviewers)"
-      ;;
-  esac
-
-  local -a reviewer_args=()
-  [[ -n "$reviewers" ]] && reviewer_args=(--reviewer "$reviewers")
+  local reviewers_file="${MKPR_REVIEWERS_FILE:-$HOME/.config/mkpr/reviewers}"
+  if [[ -f "$reviewers_file" ]]; then
+    local pattern list
+    while read -r pattern list; do
+      [[ -z "$pattern" || "$pattern" == \#* ]] && continue
+      if [[ "$repo_slug" == ${~pattern} ]]; then
+        reviewers="$list"
+        break
+      fi
+    done < "$reviewers_file"
+  fi
+  [[ -z "$reviewers" ]] && echo "⚠️  No reviewers configured for $repo_slug in $reviewers_file (creating PR without reviewers)"
 
   # ── Build --label args (handle comma-separated multi-label string) ────────────
   local -a label_args=()
@@ -279,7 +276,7 @@ mkpr() {
     done
   fi
 
-  # ── Create PR ────────────────────────────────────────────────────────────────
+  # ── Create PR (reviewers are requested afterwards — see below) ──────────────
   echo "🚀 Creating PR: $current_branch → $base_branch ($repo_slug)"
 
   local url
@@ -290,9 +287,24 @@ mkpr() {
     --title "$title" \
     --body "$body" \
     --assignee "@me" \
-    "${reviewer_args[@]}" \
     "${label_args[@]}")" || return 1
 
   echo "✅ PR created: $url"
+
+  # ── Reviewers: requested after creation so a CODEOWNERS race can't fail mkpr ─
+  # GitHub auto-requests code owners right after the PR opens; requesting
+  # reviewers at the same moment intermittently fails (cli/cli#9604).
+  if [[ -n "$reviewers" ]]; then
+    local attempt
+    for attempt in 1 2 3; do
+      sleep 2
+      if gh pr edit "$url" --add-reviewer "$reviewers" >/dev/null 2>&1; then
+        echo "👀 Reviewers requested: $reviewers"
+        break
+      fi
+      (( attempt == 3 )) && echo "⚠️  Could not request reviewers ($reviewers) — CODEOWNERS may already cover them"
+    done
+  fi
+
   command -v open >/dev/null 2>&1 && open "$url"
 }

@@ -55,3 +55,6 @@ export PATH=$PATH:~/Library/Android/sdk/platform-tools/
 [[ -d "$HOME/.docker/completions" ]] && fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
+
+# Machine-local config (secrets, work-only helpers) — never committed
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

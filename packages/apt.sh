@@ -22,6 +22,7 @@ core_packages=(
     tree
     bat
     gh
+    jq
     lsd
     speedtest-cli
 )
